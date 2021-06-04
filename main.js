@@ -4,7 +4,7 @@ var app = new Vue({
         product: 'Socks',
         image: '1578366170160_4.png',
         altText: 'hahaha',
-        inventory: 0,
-        inStock: false
+        inStock: true,
+        details: ["80% cotton", "20% polyester", "Gender-neutral"]
     }
 });

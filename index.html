@@ -8,16 +8,16 @@
         <div id="app">
             <div class="product">
                 <div class="product-image">
-                    <img v-bind:src="image" v-bind:alt="altText"/>
+                    <img :src="image" style="height: 100px"/>
                 </div>
                 <div class="product-info">
                     <h1>{{ product }}</h1>
-                    <!-- this will show or hide the dom without recreate it-->
-                    <p v-show="inStock">In Stock</p>
-                    <!-- there are create and replace dom -->
-                    <p v-if="inventory > 10 ">In Stock</p>
-                    <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
+                    <p v-if="inStock">In Stock</p>
                     <p v-else>Out of Stock</p>
+                    <ul>
+                        <!-- details is the variable, and detail is the item 'alias' in the array -->
+                        <li v-for="detail in details">{{ detail }}</li>
+                    </ul>
                 </div>
             </div>
         </div>
