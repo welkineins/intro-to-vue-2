@@ -3,6 +3,8 @@ var app = new Vue({
     data: {
         product: 'Socks',
         image: '1578366170160_4.png',
-        altText: 'hahaha'
+        altText: 'hahaha',
+        inventory: 0,
+        inStock: false
     }
 });

@@ -8,13 +8,16 @@
         <div id="app">
             <div class="product">
                 <div class="product-image">
-                    <!-- bind attribute (v-bind:src) to expression (image)-->
-                    <img v-bind:src="image" v-bind:alt="altText"/> 
-                    <!-- shortcut to ignore v-bind bug left the colon -->
-                    <img :src="image"/> 
+                    <img v-bind:src="image" v-bind:alt="altText"/>
                 </div>
                 <div class="product-info">
                     <h1>{{ product }}</h1>
+                    <!-- this will show or hide the dom without recreate it-->
+                    <p v-show="inStock">In Stock</p>
+                    <!-- there are create and replace dom -->
+                    <p v-if="inventory > 10 ">In Stock</p>
+                    <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
+                    <p v-else>Out of Stock</p>
                 </div>
             </div>
         </div>
