@@ -4,9 +4,19 @@
         <title>Product App</title>
     </head>
     <body>
+        <div class="nav-bar"></div>
         <div id="app">
-            <h1>{{ product + '?' }}</h1>
-            <h2>{{ product }}</h2>
+            <div class="product">
+                <div class="product-image">
+                    <!-- bind attribute (v-bind:src) to expression (image)-->
+                    <img v-bind:src="image" v-bind:alt="altText"/> 
+                    <!-- shortcut to ignore v-bind bug left the colon -->
+                    <img :src="image"/> 
+                </div>
+                <div class="product-info">
+                    <h1>{{ product }}</h1>
+                </div>
+            </div>
         </div>
     </body>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
