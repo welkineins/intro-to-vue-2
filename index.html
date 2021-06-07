@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Product App</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div class="nav-bar"></div>
@@ -17,11 +18,13 @@
                     <ul>
                         <li v-for="detail in details">{{ detail }}</li>
                     </ul>
-                    <div v-for="variant in variants" :key="variant.variantId">
-                        <!-- @ is the short form of 'v-on:' -->
-                        <p @mouseover="updateProduct(variant.variantImage)">{{ variant.variantColor }}</p>
+                    <div v-for="variant in variants" 
+                         :key="variant.variantId"
+                         class="color-box"
+                         :style="{ backgroundColor: variant.variantColor, height: '15px', width: '15px' }"
+                         @mouseover="updateProduct(variant.variantImage)">
                     </div>
-                    <button v-on:click="addToCart">Add to cart</button>
+                    <button v-on:click="addToCart" :disabled="!inStock" :class="{ disableButton: !inStock }">Add to cart</button>
                     <div class="cart">
                         <p> Cart({{ cart }})</p>
                     </div>
