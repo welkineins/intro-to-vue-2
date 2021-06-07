@@ -27,18 +27,7 @@ Vue.component('product', {
         <button v-on:click="addToCart" :disabled="!inStock" :class="{ disableButton: !inStock }">Add to cart</button>
     </div>
 
-    <div>
-        <h2>Reviews</h2>
-        <p v-if="reviews.length == 0"> There are no reviews yet.</p>
-        <ul>
-            <li v-for="review in reviews">
-                <p>{{ review.name }}</p>
-                <p>Rating: {{ review.rating }}</p>
-                <p>{{ review.review }}</p>
-            </li>
-        </ul>
-    </div>
-    <product-review @review-submitted="addReview"></product-review>
+    <product-tabs :reviews="reviews"></product-tabs>
 </div>`,
     data: function() {
         return {
@@ -70,9 +59,6 @@ Vue.component('product', {
         },
         updateProduct: function(index) {
             this.selectedVariant = index;
-        },
-        addReview: function(obj) {
-            this.reviews.push(obj);
         }
     },
     computed: {
@@ -158,6 +144,48 @@ Vue.component("product-review", {
                 if (!this.review) this.errors.push("Review required.");
                 if (!this.rating) this.errors.push("Rating required.");
             }
+        }
+    }
+});
+
+Vue.component('product-tabs', {
+    props: {
+        reviews: {
+            type: Array,
+            required: true
+        }
+    },
+    template: `
+        <div>
+            <span class="tab" :class="{activeTab: selectedTab === tab}"
+                 v-for="(tab, index) in tabs"
+                 :key="index"
+                 @click="selectedTab = tab">
+                 {{tab}}
+            </span>
+            <div v-show="selectedTab === 'Reviews'">
+            <h2>Reviews</h2>
+            <p v-if="reviews.length == 0"> There are no reviews yet.</p>
+            <ul>
+                <li v-for="review in reviews">
+                    <p>{{ review.name }}</p>
+                    <p>Rating: {{ review.rating }}</p>
+                    <p>{{ review.review }}</p>
+                </li>
+            </ul>
+        </div>
+        <product-review @review-submitted="addReview" v-show="selectedTab === 'Make a Review'"></product-review>
+        </div>
+    `,
+    data() {
+        return {
+            tabs: ['Reviews', 'Make a Review'],
+            selectedTab: 'Reviews'
+        }
+    },
+    methods: {
+        addReview: function(obj) {
+            this.reviews.push(obj);
         }
     }
 });
